@@ -18,14 +18,14 @@
     ]
   },
   "acceptance": {
-    "repeatableFromSavedParametersAndSeed": "implemented-core",
+    "repeatableFromSavedParametersAndSeed": "implemented-and-tested",
     "liveControlsUpdateModel": "implemented-unverified-browser",
     "sharedTimelineDrivesPreviewAndExport": "implemented-unverified-browser",
     "saveLoadProject": "implemented-unverified-browser",
     "playableVerticalVideoMatchesScenario": "implemented-unverified-export",
     "exportCancellationAndErrors": "implemented-unverified-browser",
     "runnableQuickStart": "implemented-unverified-server",
-    "automatedTestsAndBuild": "tests-pass-locally-ci-rerun-pending",
+    "automatedTestsAndBuild": "green-ci",
     "realBrowserAndExportVerification": "pending"
   },
   "milestones": [
@@ -59,13 +59,13 @@
     },
     {
       "when": "2026-09-22T02:00-04:00",
-      "command": "GitHub Actions run 3 after d300b920d18e85f71ebe58ef1ed307bfc63f7ef9",
-      "result": "queued at handoff; cache removed and Node 24 selected",
+      "command": "GitHub Actions run 3 at d300b920d18e85f71ebe58ef1ed307bfc63f7ef9",
+      "result": "PASS: Node 24; 6 tests passed; npm run build passed; dist/index.html 14536 bytes; dist/src/sim/model.js 4261 bytes",
       "observed": true
     }
   ],
   "handoff": {
-    "next": "Check CI run 3 first. If green, perform real browser interaction and WebM export validation. Fix any export/browser issues before adding breadth or a second simulation model.",
+    "next": "Perform real browser interaction and WebM export validation. Open the produced video and compare its scenario/fingerprint/timeline against the editor. Fix any export/browser issues before adding breadth or a second simulation model.",
     "doNot": [
       "Do not continue Graft automatically.",
       "Do not start Cutcraft or Imprint without fresh approval.",
