@@ -1,0 +1,69 @@
+{
+  "project": "Kinetic",
+  "cycle": {
+    "start": "2026-09-21",
+    "end": "2026-09-27",
+    "timezone": "America/New_York",
+    "repository": "shlbi/kinetic",
+    "visibility": "public",
+    "visibilityApprovedByUser": true
+  },
+  "productContract": {
+    "summary": "One editable deterministic simulation produces both an interactive explainer and a rendered video from the same timeline.",
+    "firstModel": "traffic-ring-v1",
+    "limitations": [
+      "Educational simplified ring-road model, not a calibrated traffic prediction system.",
+      "No arbitrary model-generated code execution.",
+      "No paid API is required for the core demo."
+    ]
+  },
+  "acceptance": {
+    "repeatableFromSavedParametersAndSeed": "implemented-core",
+    "liveControlsUpdateModel": "implemented-unverified-browser",
+    "sharedTimelineDrivesPreviewAndExport": "implemented-unverified-browser",
+    "saveLoadProject": "implemented-unverified-browser",
+    "playableVerticalVideoMatchesScenario": "implemented-unverified-export",
+    "exportCancellationAndErrors": "implemented-unverified-browser",
+    "runnableQuickStart": "implemented-unverified-server",
+    "automatedTestsAndBuild": "tests-executed-locally-ci-pending",
+    "realBrowserAndExportVerification": "pending"
+  },
+  "milestones": [
+    { "day": "2026-09-21", "goal": "Repository setup and deterministic simulation core", "status": "complete" },
+    { "day": "2026-09-22", "goal": "Interactive editor, save/load, shared preview/export timeline, automated verification", "status": "in-progress" },
+    { "day": "2026-09-23", "goal": "Real browser export verification and UX hardening", "status": "planned" },
+    { "day": "2026-09-24", "goal": "Project format validation, demos and edge-case handling", "status": "planned" },
+    { "day": "2026-09-25", "goal": "Repository-owned screenshots, captured demo and architecture documentation", "status": "planned" },
+    { "day": "2026-09-26", "goal": "Polish, accessibility, reproducible interview walkthrough", "status": "planned" },
+    { "day": "2026-09-27", "goal": "Release acceptance assessment only; no automatic rollover", "status": "planned" }
+  ],
+  "validation": [
+    {
+      "when": "2026-09-22T02:00-04:00",
+      "command": "node --test tests/model.test.mjs",
+      "environment": "local reconstructed mirror of committed model/test sources because container network could not resolve github.com",
+      "result": "PASS: 6 tests, 0 failed, 0 skipped",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T02:00-04:00",
+      "command": "git clone --depth=1 https://github.com/shlbi/kinetic.git",
+      "result": "BLOCKED: runtime DNS could not resolve github.com",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T02:00-04:00",
+      "command": "GitHub Actions Kinetic CI",
+      "result": "workflow committed; no run observed yet at state write",
+      "observed": true
+    }
+  ],
+  "handoff": {
+    "next": "Verify the CI run, then perform real browser interaction and WebM export validation. Fix any export/browser issues before adding breadth or a second simulation model.",
+    "doNot": [
+      "Do not continue Graft automatically.",
+      "Do not start Cutcraft or Imprint without fresh approval.",
+      "Do not claim browser/export verification until an actual playable file is opened and checked."
+    ]
+  }
+}
