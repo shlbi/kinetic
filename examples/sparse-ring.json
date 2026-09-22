@@ -1,0 +1,13 @@
+{
+  "schema": "kinetic-project-v1",
+  "name": "Sparse Ring",
+  "model": "traffic-ring-v1",
+  "seed": 11,
+  "parameters": {
+    "density": 0.34,
+    "reaction": 0.7,
+    "braking": 4.2,
+    "duration": 12,
+    "fps": 30
+  }
+}

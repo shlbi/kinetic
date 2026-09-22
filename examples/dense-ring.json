@@ -1,0 +1,13 @@
+{
+  "schema": "kinetic-project-v1",
+  "name": "Dense Ring",
+  "model": "traffic-ring-v1",
+  "seed": 77,
+  "parameters": {
+    "density": 0.78,
+    "reaction": 1.7,
+    "braking": 2.4,
+    "duration": 18,
+    "fps": 30
+  }
+}
