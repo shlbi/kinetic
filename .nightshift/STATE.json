@@ -14,24 +14,25 @@
     "limitations": [
       "Educational simplified ring-road model, not a calibrated traffic prediction system.",
       "No arbitrary model-generated code execution.",
-      "No paid API is required for the core demo."
+      "No paid API is required for the core demo.",
+      "Browser MediaRecorder timestamps are wall-clock based, so WebM container duration can differ slightly from the deterministic model timeline duration."
     ]
   },
   "acceptance": {
     "repeatableFromSavedParametersAndSeed": "implemented-and-tested",
-    "liveControlsUpdateModel": "implemented-unverified-browser",
-    "sharedTimelineDrivesPreviewAndExport": "implemented-unverified-browser",
-    "saveLoadProject": "implemented-unverified-browser",
-    "playableVerticalVideoMatchesScenario": "implemented-unverified-export",
-    "exportCancellationAndErrors": "implemented-unverified-browser",
-    "runnableQuickStart": "implemented-unverified-server",
+    "liveControlsUpdateModel": "verified-headless-chromium",
+    "sharedTimelineDrivesPreviewAndExport": "verified-browser-source-path-and-first-frame-correspondence",
+    "saveLoadProject": "verified-headless-chromium-round-trip",
+    "playableVerticalVideoMatchesScenario": "verified-vp9-webm-720x1280-fingerprint-and-decoded-first-frame",
+    "exportCancellationAndErrors": "cancellation-verified-error-handling-implemented",
+    "runnableQuickStart": "implemented-build-green-browser-navigation-blocked-by-execution-runtime-policy",
     "automatedTestsAndBuild": "green-ci",
-    "realBrowserAndExportVerification": "pending"
+    "realBrowserAndExportVerification": "verified-headless-chromium-from-exact-reconstructed-sources"
   },
   "milestones": [
     { "day": "2026-09-21", "goal": "Repository setup and deterministic simulation core", "status": "complete" },
-    { "day": "2026-09-22", "goal": "Interactive editor, save/load, shared preview/export timeline, automated verification", "status": "in-progress" },
-    { "day": "2026-09-23", "goal": "Real browser export verification and UX hardening", "status": "planned" },
+    { "day": "2026-09-22", "goal": "Interactive editor, save/load, shared preview/export timeline, automated verification", "status": "complete" },
+    { "day": "2026-09-23", "goal": "Real browser export verification and UX hardening", "status": "verification-complete-ux-hardening-next" },
     { "day": "2026-09-24", "goal": "Project format validation, demos and edge-case handling", "status": "planned" },
     { "day": "2026-09-25", "goal": "Repository-owned screenshots, captured demo and architecture documentation", "status": "planned" },
     { "day": "2026-09-26", "goal": "Polish, accessibility, reproducible interview walkthrough", "status": "planned" },
@@ -53,23 +54,41 @@
     },
     {
       "when": "2026-09-22T02:00-04:00",
-      "command": "GitHub Actions run 1",
-      "result": "FAIL before tests: setup-node npm cache required a dependency lockfile; tests/build skipped",
-      "observed": true
-    },
-    {
-      "when": "2026-09-22T02:00-04:00",
       "command": "GitHub Actions run 3 at d300b920d18e85f71ebe58ef1ed307bfc63f7ef9",
       "result": "PASS: Node 24; 6 tests passed; npm run build passed; dist/index.html 14536 bytes; dist/src/sim/model.js 4261 bytes",
       "observed": true
+    },
+    {
+      "when": "2026-09-22T03:00-04:00",
+      "command": "headless Chromium browser verification using exact reconstructed index.html and src/sim/model.js with module inlined only for transport",
+      "environment": "system Chromium via Playwright; localhost and file navigation were blocked by execution-environment administrator policy",
+      "result": "PASS: live control changed fingerprint; restoring value restored fingerprint; save emitted kinetic-project-v1 with selected values; load restored fingerprint and density; no page errors; cancellation reached Export cancelled",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T03:00-04:00",
+      "command": "real WebM export + ffprobe + ffmpeg decode + first-frame pixel comparison",
+      "result": "PASS: VP9 720x1280 WebM opened and decoded; filename fingerprint 488f54b4 matched editor; observed file 1,299,835 bytes; container duration 5.864712s for selected 6s timeline; decoded first frame 98.93% simple pixel similarity to scaled editor t=0 preview",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T03:00-04:00",
+      "command": "GitHub Actions run 35698273227 at 58b4277b7ef4de842456470c997be789cb707045",
+      "result": "PASS after export pacing/auditability change",
+      "observed": true
     }
   ],
+  "commitsThisSession": [
+    "58b4277b7ef4de842456470c997be789cb707045",
+    "3ccf05aa9b1a39436583d143d36e314edcbd004d"
+  ],
   "handoff": {
-    "next": "Perform real browser interaction and WebM export validation. Open the produced video and compare its scenario/fingerprint/timeline against the editor. Fix any export/browser issues before adding breadth or a second simulation model.",
+    "next": "Harden UX and project-file validation without broadening the model. Add clear invalid-file feedback and model/version checks, then begin repository-owned capture assets only after the editor remains green.",
     "doNot": [
       "Do not continue Graft automatically.",
       "Do not start Cutcraft or Imprint without fresh approval.",
-      "Do not claim browser/export verification until an actual playable file is opened and checked."
+      "Do not claim calibrated traffic realism or causal prediction.",
+      "Do not describe WebM container timing as frame-exact until explicit media timestamps are used."
     ]
   }
 }
