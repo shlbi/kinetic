@@ -22,19 +22,21 @@
     "repeatableFromSavedParametersAndSeed": "implemented-and-tested",
     "liveControlsUpdateModel": "verified-headless-chromium",
     "sharedTimelineDrivesPreviewAndExport": "verified-browser-source-path-and-first-frame-correspondence",
-    "saveLoadProject": "verified-headless-chromium-round-trip",
+    "saveLoadProject": "verified-headless-chromium-round-trip-with-strict-schema-model-validation",
+    "projectFileValidation": "verified-unit-ci-and-headless-chromium",
+    "syntheticDemos": "two-checked-in-projects-with-stable-fingerprints",
     "playableVerticalVideoMatchesScenario": "verified-vp9-webm-720x1280-fingerprint-and-decoded-first-frame",
     "exportCancellationAndErrors": "cancellation-verified-error-handling-implemented",
     "runnableQuickStart": "implemented-build-green-browser-navigation-blocked-by-execution-runtime-policy",
-    "automatedTestsAndBuild": "green-ci",
+    "automatedTestsAndBuild": "green-ci-17-tests",
     "realBrowserAndExportVerification": "verified-headless-chromium-from-exact-reconstructed-sources"
   },
   "milestones": [
     { "day": "2026-09-21", "goal": "Repository setup and deterministic simulation core", "status": "complete" },
     { "day": "2026-09-22", "goal": "Interactive editor, save/load, shared preview/export timeline, automated verification", "status": "complete" },
-    { "day": "2026-09-23", "goal": "Real browser export verification and UX hardening", "status": "verification-complete-ux-hardening-next" },
-    { "day": "2026-09-24", "goal": "Project format validation, demos and edge-case handling", "status": "planned" },
-    { "day": "2026-09-25", "goal": "Repository-owned screenshots, captured demo and architecture documentation", "status": "planned" },
+    { "day": "2026-09-23", "goal": "Real browser export verification and UX hardening", "status": "verification-and-core-ux-hardening-complete-ahead-of-schedule" },
+    { "day": "2026-09-24", "goal": "Project format validation, demos and edge-case handling", "status": "format-validation-and-synthetic-demos-complete-ahead-of-schedule" },
+    { "day": "2026-09-25", "goal": "Repository-owned screenshots, captured demo and architecture documentation", "status": "architecture-readme-started-capture-assets-pending" },
     { "day": "2026-09-26", "goal": "Polish, accessibility, reproducible interview walkthrough", "status": "planned" },
     { "day": "2026-09-27", "goal": "Release acceptance assessment only; no automatic rollover", "status": "planned" }
   ],
@@ -76,19 +78,48 @@
       "command": "GitHub Actions run 35698273227 at 58b4277b7ef4de842456470c997be789cb707045",
       "result": "PASS after export pacing/auditability change",
       "observed": true
+    },
+    {
+      "when": "2026-09-22T04:00-05:00",
+      "command": "node --test tests/project-format.test.mjs on exact reconstructed committed sources",
+      "result": "PASS: 9 project-format tests, 0 failed",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T04:00-05:00",
+      "command": "headless Chromium project-import verification using exact candidate sources with ES modules combined only for set_content transport",
+      "environment": "system Chromium via Playwright; direct localhost navigation remained blocked by execution-environment administrator policy",
+      "result": "PASS: traffic-ring-v2 file rejected with explicit unsupported-model message and current fingerprint unchanged; valid kinetic-project-v1 loaded; save download preserved schema/model/selected values; no page errors",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T04:00-05:00",
+      "command": "GitHub Actions run 35703472470 at a662db9f45bf1512b117cda10075c1ae4f2aa286",
+      "result": "PASS: Node 24.20.0; 15 tests passed, 0 failed; npm run build passed; dist/index.html 7245 bytes; dist/src/sim/model.js 4261 bytes",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T04:00-05:00",
+      "command": "GitHub Actions run 35703663061 at 9f95d8ce9e997ecfed41fe1666131b898c83b9b8",
+      "result": "PASS: Node 24.20.0; 17 tests passed, 0 failed; both synthetic projects validated and reproduced; npm run build passed; dist/index.html 7245 bytes; dist/src/sim/model.js 4261 bytes",
+      "observed": true
     }
   ],
   "commitsThisSession": [
-    "58b4277b7ef4de842456470c997be789cb707045",
-    "3ccf05aa9b1a39436583d143d36e314edcbd004d"
+    "e38230c2caa0c69f37c2050dda5d5e211982a48f",
+    "a662db9f45bf1512b117cda10075c1ae4f2aa286",
+    "9f95d8ce9e997ecfed41fe1666131b898c83b9b8",
+    "e989936e0c97b90dc67ab23162e5d7098281b76c"
   ],
   "handoff": {
-    "next": "Harden UX and project-file validation without broadening the model. Add clear invalid-file feedback and model/version checks, then begin repository-owned capture assets only after the editor remains green.",
+    "next": "Capture real repository-owned editor screenshots and a genuine demo GIF/video from the verified traffic-ring-v1 editor, then integrate them into the README. After capture, continue accessibility/polish and prepare a concise reproducible interview walkthrough. Do not add a second model yet.",
     "doNot": [
       "Do not continue Graft automatically.",
       "Do not start Cutcraft or Imprint without fresh approval.",
+      "Do not add a second simulation model until the first release is demonstrably polished.",
       "Do not claim calibrated traffic realism or causal prediction.",
-      "Do not describe WebM container timing as frame-exact until explicit media timestamps are used."
+      "Do not describe WebM container timing as frame-exact until explicit media timestamps are used.",
+      "Do not fabricate screenshots, demo media, coverage, users or badges."
     ]
   }
 }
