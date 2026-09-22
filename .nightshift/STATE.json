@@ -25,7 +25,7 @@
     "playableVerticalVideoMatchesScenario": "implemented-unverified-export",
     "exportCancellationAndErrors": "implemented-unverified-browser",
     "runnableQuickStart": "implemented-unverified-server",
-    "automatedTestsAndBuild": "tests-executed-locally-ci-pending",
+    "automatedTestsAndBuild": "tests-pass-locally-ci-rerun-pending",
     "realBrowserAndExportVerification": "pending"
   },
   "milestones": [
@@ -53,13 +53,19 @@
     },
     {
       "when": "2026-09-22T02:00-04:00",
-      "command": "GitHub Actions Kinetic CI",
-      "result": "workflow committed; no run observed yet at state write",
+      "command": "GitHub Actions run 1",
+      "result": "FAIL before tests: setup-node npm cache required a dependency lockfile; tests/build skipped",
+      "observed": true
+    },
+    {
+      "when": "2026-09-22T02:00-04:00",
+      "command": "GitHub Actions run 3 after d300b920d18e85f71ebe58ef1ed307bfc63f7ef9",
+      "result": "queued at handoff; cache removed and Node 24 selected",
       "observed": true
     }
   ],
   "handoff": {
-    "next": "Verify the CI run, then perform real browser interaction and WebM export validation. Fix any export/browser issues before adding breadth or a second simulation model.",
+    "next": "Check CI run 3 first. If green, perform real browser interaction and WebM export validation. Fix any export/browser issues before adding breadth or a second simulation model.",
     "doNot": [
       "Do not continue Graft automatically.",
       "Do not start Cutcraft or Imprint without fresh approval.",
